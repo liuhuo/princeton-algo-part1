@@ -1,0 +1,6 @@
+## files to ignore
+*.class
+*.zip
+
+## dir to ignore
+classes/

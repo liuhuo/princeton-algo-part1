@@ -1,0 +1,62 @@
+<project name="algorithm" default="week1" basedir=".">
+    <property name="src" value="src"/>
+    <property name="classes" value="classes"/>
+    <property name="lib" value="lib" />
+    <property name="data" value="data" />
+
+    <property name="perc-visual-main" value="PercolationVisualizer"/>
+    <property name="perc-interactive" value="InteractivePercolationVisualizer"/>
+    <property name="perc-stat" value="PercolationStats"/>
+
+    <path id="classpath">
+        <fileset dir="${lib}" includes="**/*.jar"/>
+        <pathelement path="${classes}" />
+    </path>
+
+    <target name="init">
+        <tstamp/>
+        <mkdir dir="${classes}"/>
+    </target>
+
+    <target name="week1" depends="init">
+        <javac srcdir="${src}/week1" destdir="${classes}" includeAntRuntime="false" debug="true" debuglevel="lines,vars,source">
+            <classpath>
+                <path refid="classpath"/>
+            </classpath>
+            <compilerarg value="-Xlint:unchecked"/>
+            <compilerarg value="-proc:none"/>
+        </javac>
+    </target>
+
+    <target name="perc-visual" depends="week1">
+        <java fork="true" classname="${perc-visual-main}">
+            <classpath>
+                <path refid="classpath"/>
+            </classpath>
+            <arg value="${arg0}"/>
+        </java>
+    </target>
+
+    <target name="perc-interactive" depends="week1">
+        <java fork="true" classname="${perc-interactive}">
+            <classpath>
+                <path refid="classpath"/>
+            </classpath>
+        </java>
+    </target>
+
+    <target name="perc-stat" depends="week1">
+        <java fork="true" classname="${perc-stat}">
+            <classpath>
+                <path refid="classpath"/>
+            </classpath>
+            <arg value="${arg0}"/>
+            <arg value="${arg1}"/>
+        </java>
+    </target>
+
+    <target name="clean">
+        <delete dir="${classes}"/>
+    </target>
+
+</project>
