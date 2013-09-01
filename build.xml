@@ -18,6 +18,31 @@
         <mkdir dir="${classes}"/>
     </target>
 
+    <target name="exer" depends="init">
+        <javac srcdir="${src}" destdir="${classes}" includeAntRuntime="false" debug="true" debuglevel="lines,vars,source">
+            <classpath>
+                <path refid="classpath"/>
+            </classpath>
+        </javac>
+    </target>
+
+    <target name="qf" depends="exer">
+        <java fork="true" classname="exercises.MyQuickFind">
+            <classpath>
+                <path refid="classpath"/>
+            </classpath>
+        </java>
+    </target>
+
+    <target name="wqu" depends="exer">
+        <java fork="true" classname="exercises.MyWeightedQuickUnion">
+            <classpath>
+                <path refid="classpath"/>
+            </classpath>
+        </java>
+    </target>
+
+
     <target name="week1" depends="init">
         <javac srcdir="${src}/week1" destdir="${classes}" includeAntRuntime="false" debug="true" debuglevel="lines,vars,source">
             <classpath>
