@@ -54,9 +54,7 @@
             <arg value="${arg1}"/>
         </java>
     </target>
-
     <target name="clean">
         <delete dir="${classes}"/>
     </target>
-
 </project>
