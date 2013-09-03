@@ -1,4 +1,4 @@
-<project name="algorithm" default="week1" basedir=".">
+<project name="algorithm" default="compile" basedir=".">
     <property name="src" value="src"/>
     <property name="classes" value="classes"/>
     <property name="lib" value="lib" />
@@ -7,6 +7,9 @@
     <property name="perc-visual-main" value="PercolationVisualizer"/>
     <property name="perc-interactive" value="InteractivePercolationVisualizer"/>
     <property name="perc-stat" value="PercolationStats"/>
+    <property name="deque" value="Deque"/>
+    <property name="randomized" value="RandomizedQueue"/>
+    <property name="subset" value="Subset"/>
 
     <path id="classpath">
         <fileset dir="${lib}" includes="**/*.jar"/>
@@ -18,8 +21,33 @@
         <mkdir dir="${classes}"/>
     </target>
 
-    <target name="week1" depends="init">
-        <javac srcdir="${src}/week1" destdir="${classes}" includeAntRuntime="false" debug="true" debuglevel="lines,vars,source">
+    <target name="exer" depends="init">
+        <javac srcdir="${src}" destdir="${classes}" includeAntRuntime="false" debug="true" debuglevel="lines,vars,source">
+            <classpath>
+                <path refid="classpath"/>
+            </classpath>
+        </javac>
+    </target>
+
+    <target name="qf" depends="exer">
+        <java fork="true" classname="exercises.MyQuickFind">
+            <classpath>
+                <path refid="classpath"/>
+            </classpath>
+        </java>
+    </target>
+
+    <target name="wqu" depends="exer">
+        <java fork="true" classname="exercises.MyWeightedQuickUnion">
+            <classpath>
+                <path refid="classpath"/>
+            </classpath>
+        </java>
+    </target>
+
+
+    <target name="compile" depends="init">
+        <javac srcdir="${src}/week2" destdir="${classes}" includeAntRuntime="false" debug="true" debuglevel="lines,vars,source">
             <classpath>
                 <path refid="classpath"/>
             </classpath>
@@ -28,7 +56,32 @@
         </javac>
     </target>
 
-    <target name="perc-visual" depends="week1">
+
+    <target name="deque" depends="compile">
+        <java fork="true" classname="${deque}">
+            <classpath>
+                <path refid="classpath"/>
+            </classpath>
+        </java>
+    </target>
+
+    <target name="randomized" depends="compile">
+        <java fork="true" classname="${randomized}">
+            <classpath>
+                <path refid="classpath"/>
+            </classpath>
+        </java>
+    </target>
+
+    <target name="subset" depends="compile">
+        <java fork="true" classname="${subset}">
+            <classpath>
+                <path refid="classpath"/>
+            </classpath>
+        </java>
+    </target>
+
+    <target name="perc-visual" depends="compile">
         <java fork="true" classname="${perc-visual-main}">
             <classpath>
                 <path refid="classpath"/>
@@ -37,7 +90,7 @@
         </java>
     </target>
 
-    <target name="perc-interactive" depends="week1">
+    <target name="perc-interactive" depends="compile">
         <java fork="true" classname="${perc-interactive}">
             <classpath>
                 <path refid="classpath"/>
@@ -45,7 +98,7 @@
         </java>
     </target>
 
-    <target name="perc-stat" depends="week1">
+    <target name="perc-stat" depends="compile">
         <java fork="true" classname="${perc-stat}">
             <classpath>
                 <path refid="classpath"/>
