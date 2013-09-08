@@ -10,6 +10,9 @@
     <property name="deque" value="Deque"/>
     <property name="randomized" value="RandomizedQueue"/>
     <property name="subset" value="Subset"/>
+    <property name="plotter" value="PointPlotter"/>
+    <property name="brute" value="Brute"/>
+    <property name="fast" value="Fast"/>
 
     <path id="classpath">
         <fileset dir="${lib}" includes="**/*.jar"/>
@@ -47,7 +50,7 @@
 
 
     <target name="compile" depends="init">
-        <javac srcdir="${src}/week2" destdir="${classes}" includeAntRuntime="false" debug="true" debuglevel="lines,vars,source">
+        <javac srcdir="${src}/week3" destdir="${classes}" includeAntRuntime="false" debug="true" debuglevel="lines,vars,source">
             <classpath>
                 <path refid="classpath"/>
             </classpath>
@@ -56,6 +59,32 @@
         </javac>
     </target>
 
+    <target name="fast" depends="compile">
+        <java fork="true" classname="${fast}">
+            <classpath>
+                <path refid="classpath"/>
+            </classpath>
+            <arg value="${arg0}"/>
+        </java>
+    </target>
+
+    <target name="brute" depends="compile">
+        <java fork="true" classname="${brute}">
+            <classpath>
+                <path refid="classpath"/>
+            </classpath>
+            <arg value="${arg0}"/>
+        </java>
+    </target>
+
+    <target name="plotter" depends="compile">
+        <java fork="true" classname="${plotter}">
+            <classpath>
+                <path refid="classpath"/>
+            </classpath>
+            <arg value="${arg0}"/>
+        </java>
+    </target>
 
     <target name="deque" depends="compile">
         <java fork="true" classname="${deque}">
