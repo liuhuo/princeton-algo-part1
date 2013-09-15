@@ -13,6 +13,7 @@
     <property name="plotter" value="PointPlotter"/>
     <property name="brute" value="Brute"/>
     <property name="fast" value="Fast"/>
+    <property name="board" value="Board"/>
 
     <path id="classpath">
         <fileset dir="${lib}" includes="**/*.jar"/>
@@ -50,13 +51,21 @@
 
 
     <target name="compile" depends="init">
-        <javac srcdir="${src}/week3" destdir="${classes}" includeAntRuntime="false" debug="true" debuglevel="lines,vars,source">
+        <javac srcdir="${src}/week4" destdir="${classes}" includeAntRuntime="false" debug="true" debuglevel="lines,vars,source">
             <classpath>
                 <path refid="classpath"/>
             </classpath>
             <compilerarg value="-Xlint:unchecked"/>
             <compilerarg value="-proc:none"/>
         </javac>
+    </target>
+
+    <target name="board" depends="compile">
+        <java fork="true" classname="${board}">
+            <classpath>
+                <path refid="classpath"/>
+            </classpath>
+        </java>
     </target>
 
     <target name="fast" depends="compile">
