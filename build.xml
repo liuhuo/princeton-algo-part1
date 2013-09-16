@@ -14,6 +14,7 @@
     <property name="brute" value="Brute"/>
     <property name="fast" value="Fast"/>
     <property name="board" value="Board"/>
+    <property name="solver" value="Solver"/>
 
     <path id="classpath">
         <fileset dir="${lib}" includes="**/*.jar"/>
@@ -58,6 +59,15 @@
             <compilerarg value="-Xlint:unchecked"/>
             <compilerarg value="-proc:none"/>
         </javac>
+    </target>
+
+    <target name="solver" depends="compile">
+        <java fork="true" classname="${solver}">
+            <classpath>
+                <path refid="classpath"/>
+            </classpath>
+            <arg value="${arg0}"/>
+        </java>
     </target>
 
     <target name="board" depends="compile">
