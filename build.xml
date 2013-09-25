@@ -18,6 +18,7 @@
     <property name="range" value="RangeSearchVisualizer"/>
     <property name="neighbor" value="NearestNeighborVisualizer"/>
     <property name="kdtree" value="KdTree"/>
+    <property name="kdtree-visual" value="KdTreeVisualizer"/>
 
     <path id="classpath">
         <fileset dir="${lib}" includes="**/*.jar"/>
@@ -62,6 +63,15 @@
             <compilerarg value="-Xlint:unchecked"/>
             <compilerarg value="-proc:none"/>
         </javac>
+    </target>
+
+    <target name="kdtree-visual" depends="compile">
+        <java fork="true" classname="${kdtree-visual}">
+            <classpath>
+                <path refid="classpath"/>
+            </classpath>
+            <arg value="${arg0}"/>
+        </java>
     </target>
 
     <target name="kdtree" depends="compile">
